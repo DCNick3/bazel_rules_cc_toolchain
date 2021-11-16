@@ -188,6 +188,13 @@ C_VERSIONS = [
     provides = ["c_standard"],
 ) for c_version in C_VERSIONS]
 
+# this is to make clang shut up about -pthread being unused (I don't care)
+cc_feature(
+    name = "ignore_unused_arguments",
+    enabled = True,
+    linker_flags = ["-Wno-unused-command-line-argument"],
+)
+
 stardoc(
     name = "features_doc",
     out = "features_doc.md",
