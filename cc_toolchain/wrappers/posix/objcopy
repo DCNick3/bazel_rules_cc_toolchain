@@ -23,4 +23,4 @@
 # SOFTWARE.
 
 set -euo pipefail
-$OBJCOPY_TOOL_PATH $@
+exec "$(dirname "$0")/generic_tool_wrapper" "$OBJCOPY_TOOL_PATH" "$@"

@@ -23,4 +23,4 @@
 # SOFTWARE.
 
 set -euo pipefail
-$STRIP_TOOL_PATH "$@"
+exec "$(dirname "$0")/generic_tool_wrapper" "$STRIP_TOOL_PATH" "$@"

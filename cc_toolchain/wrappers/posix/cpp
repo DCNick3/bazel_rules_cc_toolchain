@@ -23,6 +23,4 @@
 # SOFTWARE.
 
 set -euo pipefail
-# Workaround to replace all system includes with user includes
-$CPP_TOOL_PATH $@
-#external/arm-none-eabi-compiler/bin/arm-none-eabi-cpp "$@"
+exec "$(dirname "$0")/generic_tool_wrapper" "$CPP_TOOL_PATH" "$@"

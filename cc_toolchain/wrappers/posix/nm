@@ -23,4 +23,4 @@
 # SOFTWARE.
 
 set -euo pipefail
-$NM_TOOL_PATH $@
+exec "$(dirname "$0")/generic_tool_wrapper" "$NM_TOOL_PATH" "$@"

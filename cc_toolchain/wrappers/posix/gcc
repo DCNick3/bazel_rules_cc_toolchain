@@ -23,4 +23,4 @@
 # SOFTWARE.
 
 set -euo pipefail
-$GCC_TOOL_PATH $@
+exec "$(dirname "$0")/generic_tool_wrapper" "$GCC_TOOL_PATH" "$@"

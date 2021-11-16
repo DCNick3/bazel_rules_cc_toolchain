@@ -23,4 +23,19 @@
 # SOFTWARE.
 
 set -euo pipefail
-"$(dirname "$0")/generic_tool_wrapper" "$AR_TOOL_PATH" "$@"
+TOOL_PATH="$1"
+shift
+if [[ -f "$TOOL_PATH" ]]; then
+    exec "$TOOL_PATH" "$@"
+elif [[ "$0" == "/"* ]]; then
+    # Some consumers of `CcToolchainConfigInfo` (e.g. `cmake` from rules_foreign_cc)
+    # change CWD and call $CC (this script) with its absolute path.
+    # the execroot (i.e. `cmake` from `rules_foreign_cc`) and call CC . For cases like this,
+    # we'll try to find our tool relative to this script.
+    # This script is at _execroot_/external/_repo_name_/cc_toolchain/wrappers/posix/gcc
+    execroot_path="${0%/*/*/*/*/*/*}"
+    exec "$execroot_path/$TOOL_PATH" "$@"
+else
+    >&2 echo "ERROR: could not find $TOOL_PATH; PWD=\"$(pwd)\"; PATH=\"${PATH}\"."
+    exit 5
+fi

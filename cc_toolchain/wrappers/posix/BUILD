@@ -35,6 +35,7 @@ filegroup(
         "objcopy",
         "objdump",
         "strip",
+        "generic_tool_wrapper",
     ],
     visibility = ["//visibility:public"],
 )
