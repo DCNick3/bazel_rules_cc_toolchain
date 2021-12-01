@@ -107,10 +107,16 @@ cc_feature(
     name = "opt",
     compiler_flags = [
         "-O2",
+    ],
+    provides = ["compilation_mode"],
+)
+
+cc_feature(
+    name = "lto",
+    compiler_flags = [
         "-flto",
     ],
     linker_flags = ["-flto"],
-    provides = ["compilation_mode"],
 )
 
 cc_feature(
