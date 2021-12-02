@@ -117,4 +117,14 @@ cc_toolchain_import(
     visibility = ["@rules_cc_toolchain//config:__pkg__"],
 )
 
+cc_toolchain_import(
+    name = "llvm_libasan",
+    additional_libs = ["lib/clang/12.0.0/lib/linux/libclang_rt.asan-x86_64.a"],
+    target_compatible_with = select({
+        "@platforms//os:linux": ["@platforms//cpu:x86_64"],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+    visibility = ["@rules_cc_toolchain//config:__pkg__"],
+)
+
 # TODO: Sanitize runtime libraries.

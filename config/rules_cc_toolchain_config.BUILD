@@ -33,6 +33,11 @@ label_flag(
 )
 
 label_flag(
+    name = "libasan",
+    build_setting_default = "@rules_cc_toolchain//config:libasan_multiplexer",
+)
+
+label_flag(
     name = "user_defined",
     build_setting_default = "@rules_cc_toolchain//config:empty",
 )

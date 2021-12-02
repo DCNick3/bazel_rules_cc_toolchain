@@ -26,6 +26,23 @@ cc_toolchain_import_feature(
     toolchain_import = "@rules_cc_toolchain_config//:startup_libs",
 )
 
+cc_toolchain_import_feature(
+    name = "asan_libs",
+    toolchain_import = "@rules_cc_toolchain_config//:libasan",
+)
+
+cc_feature(
+    name = "asan",
+    implies = [":asan_libs"],
+    provides = ["sanitizer"],
+    compiler_flags = [
+        "-fsanitize=address",
+    ],
+    linker_flags = [
+        "-fsanitize=address",
+    ],
+)
+
 # Reduces binary size by putting each block of data and function in their own
 # sections, the linker can then garbage collect, discarding unused functions
 # and other dead code.
